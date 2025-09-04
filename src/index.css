@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nav-link {
+  @apply text-gray-700 hover:text-blue-600 font-medium relative;
+}
+
+.nav-link hr {
+  @apply hidden w-full border-blue-600 border-t-2 mt-1;
+}
+
+.nav-link.active hr {
+  @apply block;
+}
+
+ @layer components  { /*PatientForm */
+  .input-field {
+    @apply w-full px-4 py-2 rounded-md border border-gray-300 focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent text-sm text-gray-700 placeholder-gray-400 bg-white;
+  }
+}
