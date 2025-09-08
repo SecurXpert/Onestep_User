@@ -1,4 +1,4 @@
-import banner from '../assets/finddoc-2.png';
+import banner from '../assets/doc.png';
  
 const DoctorsHeader = () => {
  
