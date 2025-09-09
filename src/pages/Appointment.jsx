@@ -7,28 +7,55 @@ import PatientForm from '../components/PatientForm';
 import AddressDisplay from '../components/AddressDisplay';
 import RelatedDoctors from '../components/RelatedDoctors';
 import RazorpayPayment from './RazorpayPayment';
-
+ 
+// Utility function to fetch with authentication
+// const fetchWithAuth = async (url, options = {}) => {
+//   const token = sessionStorage.getItem('access_token');
+//   if (!token) {
+//     throw new Error('No access token found. Please log in.');
+//   }
+ 
+//   const headers = {
+//     ...options.headers,
+//     'Authorization': `Bearer ${token}`,
+//     'Content-Type': options.body instanceof FormData ? undefined : 'application/json',
+//   };
+ 
+//   const response = await fetch(url, {
+//     ...options,
+//     headers,
+//   });
+ 
+//   return response;
+// };
+ 
 // Utility function to fetch with authentication
 const fetchWithAuth = async (url, options = {}) => {
-  const token = sessionStorage.getItem('access_token');
+  const token = sessionStorage.getItem("access_token");
   if (!token) {
-    throw new Error('No access token found. Please log in.');
+    throw new Error("No access token found. Please log in.");
   }
-
+ 
+  // Build headers
   const headers = {
     ...options.headers,
-    'Authorization': `Bearer ${token}`,
-    'Content-Type': options.body instanceof FormData ? undefined : 'application/json',
+    Authorization: `Bearer ${token}`,
   };
-
+ 
+  // ✅ Only set JSON Content-Type if not FormData
+  if (!(options.body instanceof FormData)) {
+    headers["Content-Type"] = "application/json";
+  }
+ 
   const response = await fetch(url, {
     ...options,
     headers,
   });
-
+ 
   return response;
 };
-
+ 
+ 
 const Appointment = () => {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -74,16 +101,16 @@ const Appointment = () => {
   const [validationErrors, setValidationErrors] = useState([]);
   const [appointmentId, setAppointmentId] = useState(null);
   const [showPayment, setShowPayment] = useState(false);
-
+ 
   const maxRetries = 2;
-
+ 
   // Function to determine appointment modes based on specialization
   const getAppointmentModes = (specialization) => {
     const offlineSpecializations = ['dentist', 'dermatologist', 'ent', 'opthamologist', 'cosmetologist'];
     const homeVisitSpecializations = ['physiotherapist', 'nutritionist', 'homeopathy'];
-    
+   
     const spec = specialization?.toLowerCase() || '';
-    
+   
     if (offlineSpecializations.some(s => spec.includes(s))) {
       return ['Offline'];
     } else if (homeVisitSpecializations.some(s => spec.includes(s))) {
@@ -92,7 +119,7 @@ const Appointment = () => {
       return ['Virtual'];
     }
   };
-
+ 
   const calculateAge = (dob) => {
     if (!dob) return '';
     const birthDate = new Date(dob);
@@ -104,14 +131,14 @@ const Appointment = () => {
     }
     return age.toString();
   };
-
+ 
   useEffect(() => {
     if (!isLoggedIn) {
       alert('Please log in to book an appointment.');
       navigate('/login-register');
       return;
     }
-
+ 
     console.log('AuthContext user:', user);
     if (user && bookingForSelf) {
       setPatientInfo((prev) => ({
@@ -126,7 +153,7 @@ const Appointment = () => {
         address: user.address || prev.address || '',
       }));
     }
-
+ 
     const foundDoctor = topdoctors?.find((d) => d.doctor_id === id);
     if (foundDoctor && foundDoctor.doctor_name && foundDoctor.specialization_name) {
       setDoctor({
@@ -138,7 +165,7 @@ const Appointment = () => {
       fetchDoctor();
     }
   }, [id, isLoggedIn, navigate, topdoctors, user, bookingForSelf]);
-
+ 
   useEffect(() => {
     console.log('Related doctors useEffect triggered:', {
       showRelatedDoctors,
@@ -149,7 +176,7 @@ const Appointment = () => {
       fetchRelatedDoctors();
     }
   }, [showRelatedDoctors, doctor, selectedDate]);
-
+ 
   const fetchDoctor = async () => {
     setIsLoading(true);
     try {
@@ -178,13 +205,13 @@ const Appointment = () => {
       setIsLoading(false);
     }
   };
-
+ 
   const fetchRelatedDoctors = async () => {
     if (!doctor?.specialization_name || !selectedDate) {
       console.log('Skipping fetchRelatedDoctors: missing specialization or date');
       return;
     }
-
+ 
     try {
       const response = await fetchWithAuth(
         `https://api.onestepmedi.com:8000/slots/similar-doctors?specialization=${encodeURIComponent(
@@ -226,7 +253,7 @@ const Appointment = () => {
       setRelatedDoctors([]);
     }
   };
-
+ 
   const getDayOfWeek = (offset) => {
     const date = new Date(Date.now() + offset * 86400000);
     return {
@@ -234,7 +261,7 @@ const Appointment = () => {
       date: date.toISOString().split('T')[0],
     };
   };
-
+ 
   const daysOfWeek = [
     getDayOfWeek(0),
     getDayOfWeek(1),
@@ -243,7 +270,7 @@ const Appointment = () => {
     getDayOfWeek(4),
     getDayOfWeek(5),
   ];
-
+ 
   const fetchAvailableSlots = async (date) => {
     setLoadingAvailability(true);
     setAvailableTimes([]);
@@ -264,7 +291,7 @@ const Appointment = () => {
         // Extract available and booked slots
         const uniqueAvailableTimes = [...new Set(data.available_slots?.map((slot) => slot.time_slot) || [])];
         const uniqueBookedTimes = [...new Set(data.booked_slots?.map((slot) => slot.time_slot) || [])];
-        
+       
         // Filter out times before current time for available slots
         const now = new Date();
         const currentTime = now.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit', hour12: false });
@@ -274,7 +301,7 @@ const Appointment = () => {
           }
           return true;
         });
-
+ 
         setAvailableTimes(filteredAvailableTimes);
         setBookedTimes(uniqueBookedTimes);
         setBookingStatus(data.message || 'Slots retrieved successfully');
@@ -300,7 +327,7 @@ const Appointment = () => {
       setLoadingAvailability(false);
     }
   };
-
+ 
   const handleQuickDateSelect = (date) => {
     setCustomDateMode(false);
     setSelectedDate(date);
@@ -311,7 +338,7 @@ const Appointment = () => {
     setError('');
     setValidationErrors([]);
   };
-
+ 
   const handleCustomDateChange = (e) => {
     const date = e.target.value;
     setSelectedDate(date);
@@ -322,7 +349,7 @@ const Appointment = () => {
     setError('');
     setValidationErrors([]);
   };
-
+ 
   const handleTimeSelect = async (time) => {
     if (!selectedDate) {
       setError('Please select a date first.');
@@ -346,7 +373,7 @@ const Appointment = () => {
       setShowRelatedDoctors(false);
     }
   };
-
+ 
   const handleModeSelect = (mode) => {
     if (!selectedDate || !selectedTime) {
       alert('Please select a date and time before choosing an appointment mode.');
@@ -356,7 +383,7 @@ const Appointment = () => {
     setError('');
     setValidationErrors([]);
   };
-
+ 
   const handleSelectRelatedDoctor = (doctorId, timeSlot) => {
     setPatientInfo({
       ...patientInfo,
@@ -366,7 +393,7 @@ const Appointment = () => {
     });
     setBookingStatus(`Selected alternative doctor for forwarding.`);
   };
-
+ 
   const handlePaymentSuccess = () => {
     const saved = JSON.parse(localStorage.getItem('myAppointments')) || [];
     const appointmentWithId = {
@@ -390,188 +417,347 @@ const Appointment = () => {
     setShowPayment(false);
     setTimeout(() => navigate('/myappointment'), 3500);
   };
-
+ 
+  // const handleBook = async () => {
+  //   console.log('Starting handleBook with state:', {
+  //     id,
+  //     doctor,
+  //     selectedDate,
+  //     selectedTime,
+  //     selectedMode,
+  //     patientInfo,
+  //     user,
+  //     bookingForSelf,
+  //     reportFile,
+  //   });
+ 
+  //   const missingFields = [];
+  //   if (!isLoggedIn) {
+  //     alert('Please log in to book an appointment.');
+  //     navigate('/login-register');
+  //     return;
+  //   }
+  //   if (!id) missingFields.push('Doctor ID (from URL parameters)');
+  //   if (!doctor || !doctor.specialization_name) missingFields.push('Doctor or Specialization');
+  //   if (!doctor?.doctor_name) missingFields.push('Doctor Name');
+  //   if (!selectedDate) missingFields.push('Preferred Date');
+  //   if (!selectedTime) missingFields.push('Time Slot');
+  //   if (!selectedMode) missingFields.push('Appointment Mode');
+  //   if (!patientInfo.contact) missingFields.push('Patient Email');
+  //   if (!user?.patient_id) {
+  //     alert('Your profile is incomplete. Please update your profile with a valid patient ID in the Profile section.');
+  //     navigate('/profilepage');
+  //     return;
+  //   }
+  //   if (!patientInfo.name) missingFields.push('Patient Name');
+  //   if (!patientInfo.age || isNaN(parseInt(patientInfo.age, 10)) || parseInt(patientInfo.age, 10) <= 0)
+  //     missingFields.push('Patient Age');
+  //   if (!patientInfo.gender) missingFields.push('Gender');
+  //   if (!patientInfo.phone) missingFields.push('Phone Number');
+  //   if (!patientInfo.dob) missingFields.push('Date of Birth');
+  //   if (!patientInfo.problem || patientInfo.problem.length < 3)
+  //     missingFields.push('Problem Description (must be at least 3 characters)');
+  //   if (!patientInfo.purpose) missingFields.push('Care Objective');
+  //   if (patientInfo.consent && !patientInfo.unavailabilityOption) missingFields.push('Unavailability Option');
+  //   if (selectedMode === 'Home Visit' && !patientInfo.address) missingFields.push('Address');
+  //   if (patientInfo.purpose === 'second_opinion') {
+  //     if (!patientInfo.medical_history) {
+  //       missingFields.push('Medical History (required for second opinion)');
+  //     }
+  //     if (patientInfo.medical_history && !reportFile) {
+  //       missingFields.push('Previous Reports (required when medical history is included)');
+  //     }
+  //   }
+ 
+  //   if (missingFields.length > 0) {
+  //     alert(`Please fill all required fields: ${missingFields.join(', ')}.`);
+  //     return;
+  //   }
+ 
+  //   setLoadingAvailability(true);
+  //   setError('');
+  //   setValidationErrors([]);
+ 
+  //   try {
+  //     const timeTo24Hour = (time) => {
+  //       if (!time) return '';
+  //       const [hourMin, period] = time.split(' ');
+  //       let [hours, minutes] = hourMin.split(':').map(Number);
+  //       if (period === 'PM' && hours !== 12) hours += 12;
+  //       if (period === 'AM' && hours === 12) hours = 0;
+  //       return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00`;
+  //     };
+ 
+  //     const formatDOB = (dob) => {
+  //       if (!dob || !/^\d{2}\/\d{2}\/\d{4}$/.test(dob)) return dob;
+  //       const [day, month, year] = dob.split('/');
+  //       return `${year}-${month}-${day}`;
+  //     };
+ 
+  //     const appointmentData = {
+  //       doctor_id: id,
+  //       doctor_name: doctor.doctor_name || 'Unknown Doctor',
+  //       preferred_date: selectedDate,
+  //       time_slot: timeTo24Hour(selectedTime),
+  //       appointment_type: selectedMode.toLowerCase().replace(' ', '_'),
+  //       specialization: doctor.specialization_name,
+  //       problem_description: patientInfo.problem && patientInfo.problem.length >= 3
+  //         ? patientInfo.problem
+  //         : patientInfo.notes || 'Not specified',
+  //       opinion_type: patientInfo.purpose.toLowerCase() || 'new_consultation',
+  //       consent_to_forward: patientInfo.consent || false,
+  //       forward_option: patientInfo.unavailabilityOption || '',
+  //       is_self: bookingForSelf,
+  //       medical_history: patientInfo.medical_history || false,
+  //       name: patientInfo.name || user?.name || 'Unknown Patient',
+  //       email: patientInfo.contact || user?.email || '',
+  //       phone_number: patientInfo.phone || user?.phone || '',
+  //       age: parseInt(patientInfo.age, 10) || parseInt(calculateAge(patientInfo.dob), 10) || 0,
+  //       gender: patientInfo.gender || user?.gender || 'Other',
+  //       dob: formatDOB(patientInfo.dob) || user?.dob || '',
+  //       blood_group: patientInfo.blood_group || user?.bloodGroup || 'Unknown',
+  //       patient_id: user?.patient_id || '',
+  //       address: patientInfo.address || '',
+  //     };
+ 
+  //     console.log('appointmentData before sending:', JSON.stringify(appointmentData, null, 2));
+  //     console.log('reportFile exists:', !!reportFile);
+ 
+  //     console.log('Sending request with FormData');
+  //     const formData = new FormData();
+  //     Object.entries(appointmentData).forEach(([key, value]) => {
+  //       if (value !== undefined && value !== null) {
+  //         formData.append(key, typeof value === 'boolean' ? value.toString() : value);
+  //       }
+  //     });
+  //     if (reportFile) {
+  //       formData.append('file', reportFile);
+  //     }
+  //     console.log('FormData entries:', [...formData.entries()]);
+ 
+  //     const response = await fetchWithAuth('https://api.onestepmedi.com:8000/appointments/book', {
+  //       method: 'POST',
+  //       body: formData,
+  //     });
+ 
+  //     if (!response.ok) {
+  //       const errorData = await response.json();
+  //       console.error('Backend validation errors:', JSON.stringify(errorData.detail, null, 2));
+  //       if (Array.isArray(errorData.detail)) {
+  //         const errorMessages = errorData.detail.map((err) => {
+  //           return `Field ${err.loc.join('.')} is ${err.msg.toLowerCase()}`;
+  //         });
+  //         throw new Error(errorMessages.join('; '));
+  //       }
+  //       throw new Error(errorData.detail || 'Failed to book appointment');
+  //     }
+ 
+  //     const data = await response.json();
+  //     setAppointmentId(data.appointment_id);
+  //     setBookingStatus(`Appointment booked with ${doctor.doctor_name || 'Unknown'}.`);
+  //     if (selectedMode === 'Virtual' || selectedMode === 'Home Visit') {
+  //       setShowPayment(true);
+  //     } else {
+  //       const saved = JSON.parse(localStorage.getItem('myAppointments')) || [];
+  //       const appointmentWithId = {
+  //         id: data.appointment_id,
+  //         doctor_id: id,
+  //         date: selectedDate,
+  //         time: selectedTime,
+  //         mode: selectedMode,
+  //         name: doctor.doctor_name || 'Unknown',
+  //         specialty: doctor.specialization_name || 'Unknown',
+  //         image: doctor.image || '/src/assets/default-doctor.png',
+  //         fees: doctor.consultation_fee || '200',
+  //         status: 'pending',
+  //         payment: 'not_required',
+  //         patientEmail: patientInfo.contact || user?.email || '',
+  //         appointmentId: data.appointment_id,
+  //         userId: user?.patient_id || '',
+  //       };
+  //       localStorage.setItem('myAppointments', JSON.stringify([appointmentWithId, ...saved]));
+  //       setBookingStatus(`Appointment booked with ${doctor.doctor_name || 'Unknown'}. Please wait for confirmation.`);
+  //       setTimeout(() => navigate('/myappointment'), 3500);
+  //     }
+  //   } catch (error) {
+  //     console.error('Booking error:', error.message);
+  //     alert(`Failed to book appointment: ${error.message}`);
+  //     if (error.message.includes('Selected slot is already booked') && retryCount < maxRetries) {
+  //       setRetryCount(retryCount + 1);
+  //       setBookingStatus(`Slot unavailable. Retrying... (${retryCount + 1}/${maxRetries})`);
+  //       setTimeout(() => handleBook(), 3000);
+  //     } else {
+  //       setBookingStatus(`Failed to book appointment: ${error.message}`);
+  //       setRetryCount(0);
+  //     }
+  //   } finally {
+  //     setLoadingAvailability(false);
+  //   }
+  // };
+ 
   const handleBook = async () => {
-    console.log('Starting handleBook with state:', {
-      id,
-      doctor,
-      selectedDate,
-      selectedTime,
-      selectedMode,
-      patientInfo,
-      user,
-      bookingForSelf,
-      reportFile,
+  console.log("Starting handleBook with state:", {
+    id,
+    doctor,
+    selectedDate,
+    selectedTime,
+    selectedMode,
+    patientInfo,
+    user,
+    bookingForSelf,
+    reportFile,
+  });
+ 
+  const missingFields = [];
+  if (!isLoggedIn) {
+    alert("Please log in to book an appointment.");
+    navigate("/login-register");
+    return;
+  }
+  if (!id) missingFields.push("Doctor ID (from URL parameters)");
+  if (!doctor || !doctor.specialization_name) missingFields.push("Doctor or Specialization");
+  if (!doctor?.doctor_name) missingFields.push("Doctor Name");
+  if (!selectedDate) missingFields.push("Preferred Date");
+  if (!selectedTime) missingFields.push("Time Slot");
+  if (!selectedMode) missingFields.push("Appointment Mode");
+  if (!patientInfo.contact) missingFields.push("Patient Email");
+  if (!user?.patient_id) {
+    alert("Your profile is incomplete. Please update it with a valid patient ID.");
+    navigate("/profilepage");
+    return;
+  }
+  if (!patientInfo.name) missingFields.push("Patient Name");
+  if (!patientInfo.age || isNaN(parseInt(patientInfo.age, 10)) || parseInt(patientInfo.age, 10) <= 0)
+    missingFields.push("Patient Age");
+  if (!patientInfo.gender) missingFields.push("Gender");
+  if (!patientInfo.phone) missingFields.push("Phone Number");
+  if (!patientInfo.dob) missingFields.push("Date of Birth");
+  if (!patientInfo.problem || patientInfo.problem.length < 3)
+    missingFields.push("Problem Description (must be at least 3 characters)");
+  if (!patientInfo.purpose) missingFields.push("Care Objective");
+ 
+  if (missingFields.length > 0) {
+    alert(`Please fill all required fields: ${missingFields.join(", ")}.`);
+    return;
+  }
+ 
+  setLoadingAvailability(true);
+  setError("");
+  setValidationErrors([]);
+ 
+  try {
+    // Convert to 24-hour time format
+    const timeTo24Hour = (time) => {
+      if (!time) return "";
+      const [hourMin, period] = time.split(" ");
+      let [hours, minutes] = hourMin.split(":").map(Number);
+      if (period === "PM" && hours !== 12) hours += 12;
+      if (period === "AM" && hours === 12) hours = 0;
+      return `${hours.toString().padStart(2, "0")}:${minutes.toString().padStart(2, "0")}:00`;
+    };
+ 
+    const formatDOB = (dob) => {
+      if (!dob || !/^\d{2}\/\d{2}\/\d{4}$/.test(dob)) return dob;
+      const [day, month, year] = dob.split("/");
+      return `${year}-${month}-${day}`;
+    };
+ 
+    const appointmentData = {
+      is_self: bookingForSelf,
+      doctor_id: id,
+      specialization: doctor.specialization_name,
+      preferred_date: selectedDate,
+      time_slot: timeTo24Hour(selectedTime),
+      appointment_type: selectedMode.toLowerCase().replace(" ", "_"),
+      problem_description: patientInfo.problem || patientInfo.notes || "Not specified",
+      opinion_type: patientInfo.purpose.toLowerCase() || "new_consultation",
+ 
+      // Extra patient info
+      name: patientInfo.name || user?.name || "Unknown Patient",
+      email: patientInfo.contact || user?.email || "",
+      phone_number: patientInfo.phone || user?.phone || "",
+      age: parseInt(patientInfo.age, 10) || 0,
+      gender: patientInfo.gender || user?.gender || "Other",
+      dob: formatDOB(patientInfo.dob) || user?.dob || "",
+      blood_group: patientInfo.blood_group || user?.bloodGroup || "Unknown",
+      patient_id: user?.patient_id || "",
+      address: patientInfo.address || "",
+    };
+ 
+    console.log("📦 appointmentData before sending:", appointmentData);
+ 
+    // ✅ Send as FormData
+    const formData = new FormData();
+    Object.entries(appointmentData).forEach(([key, value]) => {
+      if (value !== undefined && value !== null) {
+        formData.append(key, typeof value === "boolean" ? value.toString() : value);
+      }
     });
-
-    const missingFields = [];
-    if (!isLoggedIn) {
-      alert('Please log in to book an appointment.');
-      navigate('/login-register');
-      return;
+    if (reportFile) {
+      formData.append("file", reportFile);
     }
-    if (!id) missingFields.push('Doctor ID (from URL parameters)');
-    if (!doctor || !doctor.specialization_name) missingFields.push('Doctor or Specialization');
-    if (!doctor?.doctor_name) missingFields.push('Doctor Name');
-    if (!selectedDate) missingFields.push('Preferred Date');
-    if (!selectedTime) missingFields.push('Time Slot');
-    if (!selectedMode) missingFields.push('Appointment Mode');
-    if (!patientInfo.contact) missingFields.push('Patient Email');
-    if (!user?.patient_id) {
-      alert('Your profile is incomplete. Please update your profile with a valid patient ID in the Profile section.');
-      navigate('/profilepage');
-      return;
-    }
-    if (!patientInfo.name) missingFields.push('Patient Name');
-    if (!patientInfo.age || isNaN(parseInt(patientInfo.age, 10)) || parseInt(patientInfo.age, 10) <= 0)
-      missingFields.push('Patient Age');
-    if (!patientInfo.gender) missingFields.push('Gender');
-    if (!patientInfo.phone) missingFields.push('Phone Number');
-    if (!patientInfo.dob) missingFields.push('Date of Birth');
-    if (!patientInfo.problem || patientInfo.problem.length < 3)
-      missingFields.push('Problem Description (must be at least 3 characters)');
-    if (!patientInfo.purpose) missingFields.push('Care Objective');
-    if (patientInfo.consent && !patientInfo.unavailabilityOption) missingFields.push('Unavailability Option');
-    if (selectedMode === 'Home Visit' && !patientInfo.address) missingFields.push('Address');
-    if (patientInfo.purpose === 'second_opinion') {
-      if (!patientInfo.medical_history) {
-        missingFields.push('Medical History (required for second opinion)');
-      }
-      if (patientInfo.medical_history && !reportFile) {
-        missingFields.push('Previous Reports (required when medical history is included)');
-      }
-    }
-
-    if (missingFields.length > 0) {
-      alert(`Please fill all required fields: ${missingFields.join(', ')}.`);
-      return;
-    }
-
-    setLoadingAvailability(true);
-    setError('');
-    setValidationErrors([]);
-
-    try {
-      const timeTo24Hour = (time) => {
-        if (!time) return '';
-        const [hourMin, period] = time.split(' ');
-        let [hours, minutes] = hourMin.split(':').map(Number);
-        if (period === 'PM' && hours !== 12) hours += 12;
-        if (period === 'AM' && hours === 12) hours = 0;
-        return `${hours.toString().padStart(2, '0')}:${minutes.toString().padStart(2, '0')}:00`;
-      };
-
-      const formatDOB = (dob) => {
-        if (!dob || !/^\d{2}\/\d{2}\/\d{4}$/.test(dob)) return dob;
-        const [day, month, year] = dob.split('/');
-        return `${year}-${month}-${day}`;
-      };
-
-      const appointmentData = {
-        doctor_id: id,
-        doctor_name: doctor.doctor_name || 'Unknown Doctor',
-        preferred_date: selectedDate,
-        time_slot: timeTo24Hour(selectedTime),
-        appointment_type: selectedMode.toLowerCase().replace(' ', '_'),
-        specialization: doctor.specialization_name,
-        problem_description: patientInfo.problem && patientInfo.problem.length >= 3
-          ? patientInfo.problem
-          : patientInfo.notes || 'Not specified',
-        opinion_type: patientInfo.purpose.toLowerCase() || 'new_consultation',
-        consent_to_forward: patientInfo.consent || false,
-        forward_option: patientInfo.unavailabilityOption || '',
-        is_self: bookingForSelf,
-        medical_history: patientInfo.medical_history || false,
-        name: patientInfo.name || user?.name || 'Unknown Patient',
-        email: patientInfo.contact || user?.email || '',
-        phone_number: patientInfo.phone || user?.phone || '',
-        age: parseInt(patientInfo.age, 10) || parseInt(calculateAge(patientInfo.dob), 10) || 0,
-        gender: patientInfo.gender || user?.gender || 'Other',
-        dob: formatDOB(patientInfo.dob) || user?.dob || '',
-        blood_group: patientInfo.blood_group || user?.bloodGroup || 'Unknown',
-        patient_id: user?.patient_id || '',
-        address: patientInfo.address || '',
-      };
-
-      console.log('appointmentData before sending:', JSON.stringify(appointmentData, null, 2));
-      console.log('reportFile exists:', !!reportFile);
-
-      console.log('Sending request with FormData');
-      const formData = new FormData();
-      Object.entries(appointmentData).forEach(([key, value]) => {
-        if (value !== undefined && value !== null) {
-          formData.append(key, typeof value === 'boolean' ? value.toString() : value);
-        }
-      });
-      if (reportFile) {
-        formData.append('file', reportFile);
-      }
-      console.log('FormData entries:', [...formData.entries()]);
-
-      const response = await fetchWithAuth('https://api.onestepmedi.com:8000/appointments/book', {
-        method: 'POST',
+ 
+    console.log("📦 FormData entries:", [...formData.entries()]);
+ 
+    const response = await fetchWithAuth(
+      "https://api.onestepmedi.com:8000/appointments/book",
+      {
+        method: "POST",
         body: formData,
-      });
-
-      if (!response.ok) {
-        const errorData = await response.json();
-        console.error('Backend validation errors:', JSON.stringify(errorData.detail, null, 2));
-        if (Array.isArray(errorData.detail)) {
-          const errorMessages = errorData.detail.map((err) => {
-            return `Field ${err.loc.join('.')} is ${err.msg.toLowerCase()}`;
-          });
-          throw new Error(errorMessages.join('; '));
-        }
-        throw new Error(errorData.detail || 'Failed to book appointment');
       }
-
-      const data = await response.json();
-      setAppointmentId(data.appointment_id);
-      setBookingStatus(`Appointment booked with ${doctor.doctor_name || 'Unknown'}.`);
-      if (selectedMode === 'Virtual' || selectedMode === 'Home Visit') {
-        setShowPayment(true);
-      } else {
-        const saved = JSON.parse(localStorage.getItem('myAppointments')) || [];
-        const appointmentWithId = {
-          id: data.appointment_id,
-          doctor_id: id,
-          date: selectedDate,
-          time: selectedTime,
-          mode: selectedMode,
-          name: doctor.doctor_name || 'Unknown',
-          specialty: doctor.specialization_name || 'Unknown',
-          image: doctor.image || '/src/assets/default-doctor.png',
-          fees: doctor.consultation_fee || '200',
-          status: 'pending',
-          payment: 'not_required',
-          patientEmail: patientInfo.contact || user?.email || '',
-          appointmentId: data.appointment_id,
-          userId: user?.patient_id || '',
-        };
-        localStorage.setItem('myAppointments', JSON.stringify([appointmentWithId, ...saved]));
-        setBookingStatus(`Appointment booked with ${doctor.doctor_name || 'Unknown'}. Please wait for confirmation.`);
-        setTimeout(() => navigate('/myappointment'), 3500);
-      }
-    } catch (error) {
-      console.error('Booking error:', error.message);
-      alert(`Failed to book appointment: ${error.message}`);
-      if (error.message.includes('Selected slot is already booked') && retryCount < maxRetries) {
-        setRetryCount(retryCount + 1);
-        setBookingStatus(`Slot unavailable. Retrying... (${retryCount + 1}/${maxRetries})`);
-        setTimeout(() => handleBook(), 3000);
-      } else {
-        setBookingStatus(`Failed to book appointment: ${error.message}`);
-        setRetryCount(0);
-      }
-    } finally {
-      setLoadingAvailability(false);
+    );
+ 
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.error("❌ Backend validation errors:", errorData);
+      throw new Error(
+        Array.isArray(errorData.detail)
+          ? errorData.detail.map((err) => `${err.loc.join(".")}: ${err.msg}`).join("; ")
+          : errorData.detail || "Failed to book appointment"
+      );
     }
-  };
-
+ 
+    const data = await response.json();
+    setAppointmentId(data.appointment_id);
+    setBookingStatus(`✅ Appointment booked with ${doctor.doctor_name || "Unknown"}.`);
+ 
+    if (selectedMode === "Virtual" || selectedMode === "Home Visit") {
+      setShowPayment(true);
+    } else {
+      const saved = JSON.parse(localStorage.getItem("myAppointments")) || [];
+      const appointmentWithId = {
+        id: data.appointment_id,
+        doctor_id: id,
+        date: selectedDate,
+        time: selectedTime,
+        mode: selectedMode,
+        name: doctor.doctor_name || "Unknown",
+        specialty: doctor.specialization_name || "Unknown",
+        image: doctor.image || "/src/assets/default-doctor.png",
+        fees: doctor.consultation_fee || "200",
+        status: "pending",
+        payment: "not_required",
+        patientEmail: patientInfo.contact || user?.email || "",
+        appointmentId: data.appointment_id,
+        userId: user?.patient_id || "",
+      };
+      localStorage.setItem("myAppointments", JSON.stringify([appointmentWithId, ...saved]));
+      setBookingStatus(`Appointment booked. Please wait for confirmation.`);
+      setTimeout(() => navigate("/myappointment"), 3500);
+    }
+  } catch (error) {
+    console.error("⚠️ Booking error:", error.message);
+    alert(`Failed to book appointment: ${error.message}`);
+  } finally {
+    setLoadingAvailability(false);
+  }
+};
+ 
+ 
   if (isLoading) {
     return <div className="text-center p-6 md:p-10">Loading...</div>;
   }
-
+ 
   if (error && !doctor) {
     return (
       <div className="text-center p-6 md:p-10 text-sm md:text-base">
@@ -579,7 +765,7 @@ const Appointment = () => {
       </div>
     );
   }
-
+ 
   return (
     <div className="bg-b3d8e4-gradient mb-8">
       <div className="max-w-5xl mx-auto bg-white px-3 py-6 md:px-4 md:py-10 ">
@@ -809,5 +995,5 @@ const Appointment = () => {
     </div>
   );
 };
-
+ 
 export default Appointment;

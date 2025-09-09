@@ -35,7 +35,7 @@ const Emergencyappointment = () => {
           throw new Error('No access token found. Please log in again.');
         }
 
-        const response = await fetch('http://api.onestepmedi.com:8000/specializations/', {
+        const response = await fetch('https://api.onestepmedi.com:8000/specializations/', {
           method: 'GET',
           headers: {
             'Content-Type': 'application/json',
@@ -222,7 +222,7 @@ const Emergencyappointment = () => {
 
       console.log('appointmentData before sending:', JSON.stringify(appointmentData, null, 2));
 
-      const response = await fetchWithAuth('http://api.onestepmedi.com:8000/emergency/emergency/book', {
+      const response = await fetchWithAuth('https://api.onestepmedi.com:8000/emergency/emergency/book', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(appointmentData),
