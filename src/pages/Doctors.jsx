@@ -118,11 +118,16 @@ const Doctors = () => {
 
     if (searchTerm) {
       try {
+        const token = sessionStorage.getItem('access_token');
         let url = `https://api.onestepmedi.com:8000/doctors/by-specialization/${encodeURIComponent(searchTerm)}`;
         if (area) {
           url = `http://api.onestepmedi.com:8000/doctors/by-specialization/area_spec/?specialization_name=${encodeURIComponent(searchTerm)}&area=${encodeURIComponent(area)}`;
         }
-        const response = await fetch(url);
+        const response = await fetch(url, {
+          headers: {
+            'Authorization': `Bearer ${token}`,
+          },
+        });
         if (!response.ok) {
           throw new Error('Failed to fetch doctors');
         }
