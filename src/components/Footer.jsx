@@ -114,6 +114,7 @@ const Footer = () => {
         </div>
 
         {/* Quick Links */}
+
         <div className="mb-6 2xs:mb-6 xs:mb-6 2sm:mb-8 sm:mb-8">
           <h4 className="text-base 2xs:text-base xs:text-lg 2sm:text-lg sm:text-lg md:text-lg md800:text-lg md900:text-lg lg:text-lg xl:text-lg 2xl:text-lg 3xl:text-lg font-semibold text-blue-100 mb-3 2xs:mb-3 xs:mb-4 2sm:mb-4 sm:mb-4">
             Quick Links
@@ -127,6 +128,7 @@ const Footer = () => {
             <li><a href="/blog" className="hover:text-blue-400 transition-colors duration-200">Blog</a></li>
             <li><a href="/contact" className="hover:text-blue-400 transition-colors duration-200">Contact Us</a></li>
             <li><a href="/testimonials" className="hover:text-blue-400 transition-colors duration-200">Testimonials</a></li>
+
           </ul>
         </div>
 
