@@ -405,12 +405,12 @@ const ProfileContent = () => {
       <div className="flex items-center justify-between mb-6">
         <div className="flex items-center gap-6">
           <div className="relative">
-            <img
-              src={profileImage || 'httpss://placehold.co/80x80?text=Profile'}
-              alt="Profile"
-              className="w-20 h-20 rounded-full object-cover border-4 border-purple-100 shadow-md"
-              onError={handleImageError}
-            />
+          <img
+  src={profileImage || 'https://placehold.co/80x80?text=Profile'}
+  alt="Profile"
+  className="w-20 h-20 rounded-full object-cover border-4 border-purple-100 shadow-md"
+  onError={handleImageError}
+/>
             {isEditing && (
               <>
                 <input
