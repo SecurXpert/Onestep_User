@@ -816,20 +816,21 @@ const Department = () => {
 
       {/* Video Container */}
       <div className="w-full max-w-7xl mx-auto px-4 mb-12">
-        <h2 className="text-2xl font-semibold text-gray-700 mb-4">Health tips</h2>
-        <div className="w-full bg-gray-200 rounded-lg overflow-hidden">
-          <div className="relative" style={{ paddingBottom: '40%' }}>
-            <iframe
-              className="absolute top-0 left-0 w-full h-full"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
-              title="Health Education Video"
-              frameBorder="0"
-              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-              allowFullScreen
-            ></iframe>
-          </div>
-        </div>
-      </div>
+  <h2 className="text-2xl font-semibold text-gray-700 mb-4">Health tips</h2>
+  <div className="w-full bg-gray-200 rounded-lg overflow-hidden">
+    <div className="relative" style={{ paddingBottom: '40%' }}>
+      <iframe
+        className="absolute top-0 left-0 w-full h-full"
+        src="https://www.youtube.com/embed/0aeTXaJrd6U"
+        title="Health Education Video"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      ></iframe>
+    </div>
+  </div>
+</div>
+
 
       {/* Tips Section */}
       <div className="w-full max-w-7xl mx-auto px-4 mb-12">
