@@ -33,14 +33,14 @@ const DoctorProfile = ({ doctor }) => {
               <p className="text-gray-600 text-sm">{doctor.certification}</p>
             </div>
           )}
-          <div className="flex items-center">
+          {/* <div className="flex items-center">
             <span className="text-blue-600 text-xs mr-1">⏳</span>
             <p className="text-gray-600 text-sm">{doctor.experience}</p>
           </div>
           <div className="flex items-center">
             <span className="text-blue-600 text-xs mr-1">🆔</span>
             <p className="text-gray-600 text-sm">ID: {doctor.id}</p>
-          </div>
+          </div> */}
         </div>
       </div>
       <div className="flex-1 space-y-2 md:space-y-3 w-full">
