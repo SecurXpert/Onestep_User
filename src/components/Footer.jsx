@@ -85,7 +85,7 @@ const Footer = () => {
             <li><a href="/" className="hover:underline">Home</a></li>
             <li><a href="/about" className="hover:underline">About Us</a></li>
             <li><a href="/doctors" className="hover:underline">Find a Doctor</a></li>
-            <li><a href="/appointment" className="hover:underline">Book Appointment</a></li>
+            {/* <li><a href="/appointment" className="hover:underline">Book Appointment</a></li> */}
             <li><a href="/emergency" className="hover:underline">Emergency Appointment</a></li>
             <li><a href="/blog" className="hover:underline">Blog</a></li>
             <li><a href="/contact" className="hover:underline">Contact Us</a></li>
