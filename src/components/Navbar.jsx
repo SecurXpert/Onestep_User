@@ -59,13 +59,16 @@ const Navbar = () => {
 
   // Handle logout
   const handleLogout = () => {
-    logout();
-    navigate('/login-register');
-    setIsProfileMenuOpen(false);
-    setIsMenuOpen(false);
-    setIsChatbotOpen(false);
-    setProfileImage(null);
-    sessionStorage.removeItem('profileImage');
+    const confirmLogout = window.confirm('Are you sure you want to logout?');
+    if (confirmLogout) {
+      logout();
+      navigate('/login-register');
+      setIsProfileMenuOpen(false);
+      setIsMenuOpen(false);
+      setIsChatbotOpen(false);
+      setProfileImage(null);
+      sessionStorage.removeItem('profileImage');
+    }
   };
 
   // Handle image load error

@@ -18,6 +18,7 @@ const cityOptions = ['Visakhapatnam', 'Hyderabad'];
 
 const SpecialityMenu = () => {
   const navigate = useNavigate();
+  const [isFocused, setIsFocused] = useState(false);
   const [searchParams, setSearchParams] = useState({
     area: '',
     searchTerm: '',
@@ -88,7 +89,7 @@ const SpecialityMenu = () => {
         // Retrieve access token from sessionStorage
         const token = sessionStorage.getItem('access_token');
         if (!token) {
-          throw new Error('No access token found. Please log in.');
+          throw new Error('Please Login/Register to continue.');
         }
 
         // Set headers with Bearer token
@@ -147,21 +148,53 @@ const SpecialityMenu = () => {
           <div className="relative w-full md:w-2/3 flex border border-gray-300 rounded-lg overflow-hidden">
             {/* Area Input with icon */}
             <div className="relative w-1/3 border-r border-gray-300">
-              <span className="absolute inset-y-0 left-0 pl-3 flex items-center">
-                <svg className="h-5 w-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                </svg>
-              </span>
-              <input
-                type="text"
-                name="area"
-                placeholder="City or Locality"
-                className="w-full pl-10 pr-4 py-3 rounded-l-lg border-0 focus:outline-none focus:ring-2 focus:ring-custom-blue text-gray-700"
-                value={searchParams.area}
-                onChange={(e) => setSearchParams((prev) => ({ ...prev, area: e.target.value }))}
-              />
-            </div>
+      <span className="absolute inset-y-0 left-0 pl-3 flex items-center">
+        <svg
+          className="h-5 w-5 text-gray-500"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.828 0l-4.243-4.243a8 8 0 1111.314 0z"
+          />
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth="2"
+            d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"
+          />
+        </svg>
+      </span>
+      <input
+        type="text"
+        name="area"
+        placeholder="City or Locality"
+        className="w-full pl-10 pr-4 py-3 rounded-l-lg border-0 focus:outline-none focus:ring-2 focus:ring-custom-blue text-gray-700"
+        value={searchParams.area}
+        onChange={(e) =>
+          setSearchParams((prev) => ({ ...prev, area: e.target.value }))
+        }
+        onFocus={() => setIsFocused(true)}
+        onBlur={() => setTimeout(() => setIsFocused(false), 200)} // Delay to allow click
+      />
+      {isFocused && suggestions.length > 0 && (
+        <ul className="absolute z-10 w-full bg-white border border-gray-300 rounded-b-lg shadow-lg mt-1 max-h-60 overflow-y-auto">
+          {suggestions.map((suggestion, index) => (
+            <li
+              key={index}
+              className="px-4 py-2 hover:bg-gray-100 cursor-pointer text-gray-700"
+              onMouseDown={() => handleSelectSuggestion(suggestion)}
+            >
+              {suggestion.name} ({suggestion.pincode})
+            </li>
+          ))}
+        </ul>
+      )}
+    </div>
 
             {/* Specialist Dropdown */}
             <div className="relative w-2/3">

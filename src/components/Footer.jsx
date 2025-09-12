@@ -21,7 +21,7 @@ const Footer = () => {
         >
           <path
             d="M0,0V46.29c47.79,22.2,103.59,32.17,158,28,70.36-5.37,136.33-33.31,206.8-37.5C438.64,32.43,512.34,53.67,583,72.05c69.27,18,138.3,24.88,209.4,13.08,36.15-6,69.85-17.84,104.45-29.34C989.49,25,1113.64,28.06,1200,56.86V0Z"
-            className="fill-current text-blue-200"
+            className="fill-current text-white-200"
           />
         </svg>
       </div>
@@ -39,20 +39,20 @@ const Footer = () => {
               One Step Medi
             </h3>
           </div>
-          <p className="text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-blue-200 mb-3 2xs:mb-3 xs:mb-4 2sm:mb-4 sm:mb-4">
+          <p className="text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-white mb-3 2xs:mb-3 xs:mb-4 2sm:mb-4 sm:mb-4">
             Your trusted partner in healthcare excellence
           </p>
           <div className="mt-3 2xs:mt-3 xs:mt-4 2sm:mt-4 sm:mt-4 flex flex-col 2xs:flex-col xs:flex-col 2sm:flex-row sm:flex-row gap-2">
             <input
               type="email"
               placeholder="Email Address..."
-              className="w-full p-2 2xs:p-2 xs:p-2.5 2sm:p-2.5 sm:p-2.5 bg-blue-800 bg-opacity-50 border border-blue-400 rounded-md 2sm:rounded-l-md sm:rounded-l-md text-blue-100 placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm"
+              className="w-full p-2 2xs:p-2 xs:p-2.5 2sm:p-2.5 sm:p-2.5 bg-blue-800 bg-opacity-50 border border-blue-400 rounded-md 2sm:rounded-l-md sm:rounded-l-md text-white placeholder-blue-300 focus:outline-none focus:ring-2 focus:ring-blue-400 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm"
             />
             <button className="bg-blue-500 hover:bg-blue-600 text-white p-2 2xs:p-2 xs:p-2.5 2sm:p-2.5 sm:p-2.5 rounded-md 2sm:rounded-r-md sm:rounded-r-md transition-colors duration-300 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm">
               Subscribe
             </button>
           </div>
-          <p className="text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-blue-200 mt-3 2xs:mt-3 xs:mt-4 2sm:mt-4 sm:mt-4">
+          <p className="text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-white mt-3 2xs:mt-3 xs:mt-4 2sm:mt-4 sm:mt-4">
             Certified by
           </p>
           <div className="flex space-x-2 2xs:space-x-2 xs:space-x-3 2sm:space-x-3 sm:space-x-3 mt-2 2xs:mt-2 xs:mt-3 2sm:mt-3 sm:mt-3">
@@ -73,7 +73,7 @@ const Footer = () => {
             </div>
           </div>
           <div className="mt-4 2xs:mt-4 xs:mt-5 2sm:mt-6 sm:mt-6">
-            <p className="text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-blue-200 mb-2 2xs:mb-2 xs:mb-3 2sm:mb-3 sm:mb-3">
+            <p className="text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-white mb-2 2xs:mb-2 xs:mb-3 2sm:mb-3 sm:mb-3">
               Follow Us On:
             </p>
             <div className="flex gap-2 2xs:gap-2 xs:gap-3 2sm:gap-3 sm:gap-3">
@@ -114,12 +114,11 @@ const Footer = () => {
         </div>
 
         {/* Quick Links */}
-
         <div className="mb-6 2xs:mb-6 xs:mb-6 2sm:mb-8 sm:mb-8">
           <h4 className="text-base 2xs:text-base xs:text-lg 2sm:text-lg sm:text-lg md:text-lg md800:text-lg md900:text-lg lg:text-lg xl:text-lg 2xl:text-lg 3xl:text-lg font-semibold text-blue-100 mb-3 2xs:mb-3 xs:mb-4 2sm:mb-4 sm:mb-4">
             Quick Links
           </h4>
-          <ul className="space-y-2 2xs:space-y-2 xs:space-y-3 2sm:space-y-3 sm:space-y-3 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-blue-200">
+          <ul className="space-y-2 2xs:space-y-2 xs:space-y-3 2sm:space-y-3 sm:space-y-3 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-white">
             <li><a href="/" className="hover:text-blue-400 transition-colors duration-200">Home</a></li>
             <li><a href="/about" className="hover:text-blue-400 transition-colors duration-200">About Us</a></li>
             <li><a href="/doctors" className="hover:text-blue-400 transition-colors duration-200">Find a Doctor</a></li>
@@ -128,7 +127,6 @@ const Footer = () => {
             <li><a href="/blog" className="hover:text-blue-400 transition-colors duration-200">Blog</a></li>
             <li><a href="/contact" className="hover:text-blue-400 transition-colors duration-200">Contact Us</a></li>
             <li><a href="/testimonials" className="hover:text-blue-400 transition-colors duration-200">Testimonials</a></li>
-
           </ul>
         </div>
 
@@ -137,11 +135,11 @@ const Footer = () => {
           <h4 className="text-base 2xs:text-base xs:text-lg 2sm:text-lg sm:text-lg md:text-lg md800:text-lg md900:text-lg lg:text-lg xl:text-lg 2xl:text-lg 3xl:text-lg font-semibold text-blue-100 mb-3 2xs:mb-3 xs:mb-4 2sm:mb-4 sm:mb-4">
             Policies & Support
           </h4>
-          <ul className="space-y-2 2xs:space-y-2 xs:space-y-3 2sm:space-y-3 sm:space-y-3 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-blue-200">
+          <ul className="space-y-2 2xs:space-y-2 xs:space-y-3 2sm:space-y-3 sm:space-y-3 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-white">
             <li><a href="/private" className="hover:text-blue-400 transition-colors duration-200">Privacy Policy</a></li>
             <li><a href="/terms" className="hover:text-blue-400 transition-colors duration-200">Terms & Conditions</a></li>
             <li>
-              <button onClick={toggleChatbot} className="hover:text-blue-400 transition-colors duration-200 text-blue-200">
+              <button onClick={toggleChatbot} className="hover:text-blue-400 transition-colors duration-200 text-white">
                 Need Help?
               </button>
             </li>
@@ -153,19 +151,19 @@ const Footer = () => {
           <h4 className="text-base 2xs:text-base xs:text-lg 2sm:text-lg sm:text-lg md:text-lg md800:text-lg md900:text-lg lg:text-lg xl:text-lg 2xl:text-lg 3xl:text-lg font-semibold text-blue-100 mb-3 2xs:mb-3 xs:mb-4 2sm:mb-4 sm:mb-4">
             Contact Information
           </h4>
-          <p className="text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-blue-200 flex items-center mb-2 2xs:mb-2 xs:mb-3 2sm:mb-3 sm:mb-3">
+          <p className="text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-white flex items-center mb-2 2xs:mb-2 xs:mb-3 2sm:mb-3 sm:mb-3">
             <svg className="w-4 2xs:w-4 xs:w-5 2sm:w-5 sm:w-5 md:w-5 md800:w-5 md900:w-5 lg:w-5 xl:w-5 2xl:w-5 3xl:w-5 h-4 2xs:h-4 xs:h-5 2sm:h-5 sm:h-5 md:h-5 md800:h-5 md900:h-5 lg:h-5 xl:h-5 2xl:h-5 3xl:h-5 mr-2 text-blue-300" fill="currentColor" viewBox="0 0 24 24">
               <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
             </svg>
             support@onestepmedi.com
           </p>
-          <p className="text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-blue-200 flex items-center mb-2 2xs:mb-2 xs:mb-3 2sm:mb-3 sm:mb-3">
+          <p className="text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-white flex items-center mb-2 2xs:mb-2 xs:mb-3 2sm:mb-3 sm:mb-3">
             <svg className="w-4 2xs:w-4 xs:w-5 2sm:w-5 sm:w-5 md:w-5 md800:w-5 md900:w-5 lg:w-5 xl:w-5 2xl:w-5 3xl:w-5 h-4 2xs:h-4 xs:h-5 2sm:h-5 sm:h-5 md:h-5 md800:h-5 md900:h-5 lg:h-5 xl:h-5 2xl:h-5 3xl:h-5 mr-2 text-blue-300" fill="currentColor" viewBox="0 0 24 24">
               <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7zm0 9.5c-1.38 0-2.5-1.12-2.5-2.5s1.12-2.5 2.5-2.5 2.5 1.12 2.5 2.5-1.12 2.5-2.5 2.5z"/>
             </svg>
             5th Floor, Krishna Towers, 100 Feet Rd, Madhapur, Hyderabad, Telangana 500081
           </p>
-          <p className="text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-blue-200 flex items-center">
+          <p className="text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-white flex items-center">
             <svg className="w-4 2xs:w-4 xs:w-5 2sm:w-5 sm:w-5 md:w-5 md800:w-5 md900:w-5 lg:w-5 xl:w-5 2xl:w-5 3xl:w-5 h-4 2xs:h-4 xs:h-5 2sm:h-5 sm:h-5 md:h-5 md800:h-5 md900:h-5 lg:h-5 xl:h-5 2xl:h-5 3xl:h-5 mr-2 text-blue-300" fill="currentColor" viewBox="0 0 24 24">
               <path d="M6.62 10.79c1.44 2.83 3.76 5.14 6.59 6.59l2.2-2.2c.27-.27.67-.36 1.02-.24 1.12.37 2.33.57 3.57.57.55 0 1 .45 1 1V20c0 .55-.45 1-1 1-9.39 0-17-7.61-17-17 0-.55.45-1 1-1h3.5c.55 0 1 .45 1 1 0 1.25.2 2.45.57 3.57.11.35.03.74-.24 1.02l-2.2 2.2z"/>
             </svg>
@@ -175,8 +173,8 @@ const Footer = () => {
       </div>
 
       {/* Bottom Bar */}
-      <div className="mt-6 2xs:mt-6 xs:mt-8 2sm:mt-8 sm:mt-8 md:mt-10 md800:mt-10 md900:mt-10 lg:mt-10 xl:mt-10 2xl:mt-10 3xl:mt-10 text-center text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-blue-200 border-t border-blue-700 pt-3 2xs:pt-3 xs:pt-4 2sm:pt-4 sm:pt-4">
-        © 2025 OneStepMedi. All Rights Reserved | <a href="/privacy" className="hover:text-blue-400 transition-colors duration-200">Privacy Policy</a> | <a href="/terms" className="hover:text-blue-400 transition-colors duration-200">Terms & Conditions</a>
+      <div className="mt-6 2xs:mt-6 xs:mt-8 2sm:mt-8 sm:mt-8 md:mt-10 md800:mt-10 md900:mt-10 lg:mt-10 xl:mt-10 2xl:mt-10 3xl:mt-10 text-center text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-sm 2xl:text-sm 3xl:text-sm text-white border-t border-blue-700 pt-3 2xs:pt-3 xs:pt-4 2sm:pt-4 sm:pt-4">
+        © 2025 OneStepMedi. All Rights Reserved | <a href="/private" className="hover:text-blue-400 transition-colors duration-200">Privacy Policy</a> | <a href="/terms" className="hover:text-blue-400 transition-colors duration-200">Terms & Conditions</a>
       </div>
 
       {/* Render Chatbot */}

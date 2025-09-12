@@ -32,7 +32,7 @@
 //       try {
 //         const accessToken = sessionStorage.getItem('access_token');
 //         if (!accessToken) {
-//           throw new Error('No access token found. Please log in again.');
+//           throw new Error('Please Login/Register to continue again.');
 //         }
 
 //         const response = await fetch('http://api.onestepmedi.com:8000/specializations/', {
@@ -496,7 +496,7 @@ const Emergencyappointment = () => {
       try {
         const accessToken = sessionStorage.getItem('access_token');
         if (!accessToken) {
-          throw new Error('No access token found. Please log in again.');
+          throw new Error('Please Login/Register to continue again.');
         }
 
         const response = await fetch('https://api.onestepmedi.com:8000/specializations/', {

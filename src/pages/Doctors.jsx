@@ -20,6 +20,26 @@ const Doctors = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const doctorsListRef = useRef(null);
+  const containerRef = useRef(null);
+  const [isAtStart, setIsAtStart] = useState(true);
+  const [isAtEnd, setIsAtEnd] = useState(false);
+
+  const checkScrollPosition = () => {
+    if (containerRef.current) {
+      const { scrollLeft, scrollWidth, clientWidth } = containerRef.current;
+      setIsAtStart(scrollLeft <= 5); // Small threshold for start
+      setIsAtEnd(scrollLeft + clientWidth >= scrollWidth - 5); // Small threshold for end
+    }
+  };
+
+  useEffect(() => {
+    const container = containerRef.current;
+    if (container) {
+      container.addEventListener('scroll', checkScrollPosition);
+      checkScrollPosition(); // Initial check
+      return () => container.removeEventListener('scroll', checkScrollPosition);
+    }
+  }, []);
 
   const specialties = [
     "Gynecologist",
@@ -149,9 +169,7 @@ const Doctors = () => {
     <div className="min-h-screen bg-white flex flex-col items-center px-4 relative overflow-hidden">
       <DoctorsHeader />
       <div className="w-full max-w-6xl relative z-10 animate-fade-in mt-0">
-        <h2 className="text-2xl md:text-4xl font-extrabold text-center text-purple-600 mb-6 md:mb-8 tracking-tight animate-fade-in-up">
-          Doctor Specialists
-        </h2>
+      
 
         <div className="flex flex-col gap-6">
           {/* Search Form Section */}
@@ -221,85 +239,101 @@ const Doctors = () => {
             <p className="text-lg md:text-m text-gray-600 mb-6 text-center max-w-2xl">
               Find the right specialist for every health need.
             </p>
-       <div className="relative w-full overflow-hidden group rounded-l-full rounded-r-full shadow-[0_4px_15px_rgba(59,130,246,0.2)]">
-  <button
-    className="absolute left-2 top-1/2 transform -translate-y-1/2 bg-custom-blue text-white p-2 rounded-full opacity-70 hover:opacity-100 transition-opacity z-10"
-    onClick={() => {
-      const container = document.querySelector('.marquee-container');
-      container.scrollBy({ left: -300, behavior: 'smooth' });
-    }}
-  >
-    <svg
-      className="w-6 h-6"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M15 19l-7-7 7-7"
-      />
-    </svg>
-  </button>
-  <button
-    className="absolute right-2 top-1/2 transform -translate-y-1/2 bg-custom-blue text-white p-2 rounded-full opacity-70 hover:opacity-100 transition-opacity z-10"
-    onClick={() => {
-      const container = document.querySelector('.marquee-container');
-      container.scrollBy({ left: 300, behavior: 'smooth' });
-    }}
-  >
-    <svg
-      className="w-6 h-6"
-      fill="none"
-      stroke="currentColor"
-      viewBox="0 0 24 24"
-      xmlns="http://www.w3.org/2000/svg"
-    >
-      <path
-        strokeLinecap="round"
-        strokeLinejoin="round"
-        strokeWidth={2}
-        d="M9 5l7 7-7 7"
-      />
-    </svg>
-  </button>
-  <div
-    className="flex marquee-container"
-    style={{ overflowX: 'hidden', scrollBehavior: 'smooth' }}
-  >
-    {speciality.map((specialty, index) => (
-      <div
-        key={`${specialty.name}-${index}`}
-        className="flex flex-col items-center mx-4 cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-2 pt-2"
-        style={{ minWidth: '150px' }}
-        onClick={() => handleClick(specialty.name)}
+            <div className="relative w-full flex items-center">
+      {/* Left Arrow Button */}
+      <button
+        className={`flex-shrink-0 bg-custom-blue text-white p-2 rounded-full transition-opacity z-10 mr-2 ${
+          isAtStart ? 'opacity-30 cursor-not-allowed' : 'opacity-70 hover:opacity-100'
+        }`}
+        onClick={() => {
+          if (!isAtStart) {
+            containerRef.current.scrollBy({ left: -300, behavior: 'smooth' });
+          }
+        }}
+        disabled={isAtStart}
       >
-        <div className="w-24 h-24 bg-custom-blue md:w-36 md:h-36 rounded-full border-2 border-custom-blue overflow-hidden shadow-md">
-          <img
-            src={specialty.image}
-            alt={specialty.name}
-            className="w-full h-full object-cover object-top rounded-full"
-          />
-        </div>
-        <h3 className="text-xs md:text-sm font-semibold text-custom-blue text-center mt-2">
-          {specialty.name}
-        </h3>
-        <button
-          onClick={(e) => {
-            e.stopPropagation();
-            handleClick(specialty.name);
-          }}
-          className="mt-2 px-4 py-1 bg-custom-blue text-white text-xs md:text-sm rounded-lg hover:bg-blue-700 transition-colors"
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
         >
-          Consult Now
-        </button>
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M15 19l-7-7 7-7"
+          />
+        </svg>
+      </button>
+
+      {/* Marquee Container */}
+      <div
+        ref={containerRef}
+        className="flex-1 overflow-hidden rounded-l-full rounded-r-full marquee-container"
+        style={{ scrollBehavior: 'smooth' }}
+      >
+        <div className="flex">
+          {speciality.map((specialty, index) => (
+            <div
+              key={`${specialty.name}-${index}`}
+              className="flex flex-col items-center mx-4 cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-2 pt-2"
+              style={{ minWidth: '150px' }}
+              onClick={() => handleClick(specialty.name)}
+            >
+              <div className="w-24 h-24 bg-custom-blue md:w-36 md:h-36 rounded-full border-2 border-custom-blue overflow-hidden shadow-md">
+                <img
+                  src={specialty.image}
+                  alt={specialty.name}
+                  className="w-full h-full object-cover object-top rounded-full"
+                />
+              </div>
+              <h3 className="text-xs md:text-sm font-semibold text-custom-blue text-center mt-2">
+                {specialty.name}
+              </h3>
+              <button
+                onClick={(e) => {
+                  e.stopPropagation();
+                  handleClick(specialty.name);
+                }}
+                className="mt-2 px-4 py-1 bg-custom-blue text-white text-xs md:text-sm rounded-lg hover:bg-blue-700 transition-colors"
+              >
+                Consult Now
+              </button>
+            </div>
+          ))}
+        </div>
       </div>
-    ))}
-  </div>
-</div>
+
+      {/* Right Arrow Button */}
+      <button
+        className={`flex-shrink-0 bg-custom-blue text-white p-2 rounded-full transition-opacity z-10 ml-2 ${
+          isAtEnd ? 'opacity-30 cursor-not-allowed' : 'opacity-70 hover:opacity-100'
+        }`}
+        onClick={() => {
+          if (!isAtEnd) {
+            containerRef.current.scrollBy({ left: 300, behavior: 'smooth' });
+          }
+        }}
+        disabled={isAtEnd}
+      >
+        <svg
+          className="w-6 h-6"
+          fill="none"
+          stroke="currentColor"
+          viewBox="0 0 24 24"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            strokeWidth={2}
+            d="M9 5l7 7-7 7"
+          />
+        </svg>
+      </button>
+    </div>
           </div>
 
           {/* Featured Specialists Section */}

@@ -18,6 +18,7 @@ const LoginRegister = () => {
   });
   const [error, setError] = useState('');
   const [termsAccepted, setTermsAccepted] = useState(false);
+  const [optInPromotions, setOptInPromotions] = useState(false); // New state for promotions checkbox
   const [showTermsDialog, setShowTermsDialog] = useState(false);
   const [step, setStep] = useState('form'); // Registration steps: form, otp
   const [otpId, setOtpId] = useState('');
@@ -128,6 +129,7 @@ const LoginRegister = () => {
       password,
       phone_number: phone,
       dob,
+      opt_in_promotions: optInPromotions, // Include promotions opt-in in payload
     };
 
     try {
@@ -186,6 +188,7 @@ const LoginRegister = () => {
           password: '',
           confirmPassword: '',
         });
+        setOptInPromotions(false); // Reset promotions checkbox
       } else {
         setError('Invalid OTP');
       }
@@ -540,6 +543,21 @@ const LoginRegister = () => {
                         Terms and Conditions
                       </span>
                       <span className="text-red-600">*</span>
+                    </label>
+                  </div>
+                  <div className="flex items-center space-x-2">
+                    <input
+                      type="checkbox"
+                      id="promotions"
+                      checked={optInPromotions}
+                      onChange={() => setOptInPromotions(!optInPromotions)}
+                      className="h-4 w-4 text-blue-600 border-gray-300 rounded"
+                    />
+                    <label
+                      htmlFor="promotions"
+                      className="text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-base md900:text-base lg:text-base xl:text-lg 2xl:text-lg 3xl:text-xl text-gray-700"
+                    >
+                      Opt-in for promotions and updates
                     </label>
                   </div>
                   <button

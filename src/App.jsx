@@ -49,6 +49,8 @@ import CaseStudyForm from "./pages/CaseStudyForm";
 import Emergencyappointment from "./pages/EmergencyAppointment";
 import Terms from "./pages/Terms";
 import Private from "./pages/policy";
+import Settings from "./pages/Settings";
+import Settings1  from "./pages/Settings1";
 
 // ScrollToTop component to handle scrolling to top on route change
 function ScrollToTop() {
@@ -115,6 +117,8 @@ const App = () => {
         <Route path="/casestudy" element={<CaseStudyForm />} />
         <Route path="/private" element={<Private />} />
         <Route path="/terms" element={<Terms />} />
+        <Route path="/settings1" element={<Settings1 />} />
+        <Route path="/settings" element={<Settings />} />
       </Routes>
       <Footer />
     </div>

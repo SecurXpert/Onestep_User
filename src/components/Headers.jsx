@@ -55,9 +55,23 @@ const Headers = () => {
           </button>
           <button
             onClick={handleEmergencyClick}
-            className="px-4 py-2 bg-custom-blue text-white font-semibold rounded-xl hover:bg-blue-700 transition-all duration-300"
+            className="px-4 py-2 bg-red-500 text-white font-semibold rounded-xl border-2 border-red-700 hover:bg-red-600 hover:scale-105 transition-all duration-300 animate-pulse flex items-center gap-2"
           >
-            Emergency Appointment →
+            <svg
+              className="w-5 h-5"
+              fill="none"
+              stroke="currentColor"
+              viewBox="0 0 24 24"
+              xmlns="http://www.w3.org/2000/svg"
+            >
+              <path
+                strokeLinecap="round"
+                strokeLinejoin="round"
+                strokeWidth="2"
+                d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm0 16v-4m0-4V6"
+              />
+            </svg>
+            Emergency Appointment
           </button>
           <button
             onClick={toggleChatbot}

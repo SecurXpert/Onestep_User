@@ -362,7 +362,7 @@ const AboutUs = () => {
                 <p className="text-gray-600 ml-6">Your data is handled with the highest confidentiality standards.</p>
               </ul>
               <a
-                href="/security-privacy"
+                href="/private"
                 className="inline-block bg-blue-500 text-white px-5 sm:px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors duration-300 ml-2 sm:ml-3"
               >
                 Read More
@@ -378,7 +378,7 @@ const AboutUs = () => {
           </div>
 
           {/* What Doctor Say About Us */}
-          <div className="bg-gray-100 rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 max-w-5xl mx-auto mt-8 mb-8">
+          <div className="bg-gray-100 rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 max-w-7xl mx-auto mt-8 mb-8">
             <div className="w-full p-2 sm:p-4">
               <h3 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-3 text-center">What Doctor Say About Us?</h3>
               <p className="font-bold mb-3 text-center">Trusted by healthcare professionals across India.</p>

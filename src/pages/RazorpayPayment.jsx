@@ -24,7 +24,7 @@ const RazorpayPayment = ({ appointmentId, amount, onSuccess, doctorName, patient
       // Retrieve access token from sessionStorage
       const token = sessionStorage.getItem('access_token');
       if (!token) {
-        throw new Error('No access token found. Please log in.');
+        throw new Error('Please Login/Register to continue.');
       }
 
       // Step 1: Create order from backend

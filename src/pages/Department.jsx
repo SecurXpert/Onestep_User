@@ -536,7 +536,7 @@ const Department = () => {
         setLoading(true);
         const token = sessionStorage.getItem('access_token');
         if (!token) {
-          throw new Error('No access token found. Please log in.');
+          throw new Error('Please Login/Register to continue.');
         }
 
         let url = `https://api.onestepmedi.com:8000/doctors/by-specialization/${encodeURIComponent(specialtyName)}`;
@@ -591,7 +591,7 @@ const Department = () => {
         setLoading(true);
         const token = sessionStorage.getItem('access_token');
         if (!token) {
-          throw new Error('No access token found. Please log in.');
+          throw new Error('Please Login/Register to continue.');
         }
 
         let url = `https://api.onestepmedi.com:8000/doctors/by-specialization/${encodeURIComponent(searchTerm)}`;

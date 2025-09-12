@@ -4,7 +4,7 @@ import React, { useEffect, useState } from 'react';
 const fetchWithAuth = async (url, options = {}) => {
   const token = sessionStorage.getItem('access_token');
   if (!token) {
-    throw new Error('No access token found. Please log in.');
+    throw new Error('Please Login/Register to continue.');
   }
 
   const headers = {
