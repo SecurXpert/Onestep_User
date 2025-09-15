@@ -96,24 +96,24 @@ const AboutUs = () => {
         <div className="max-w-7xl mx-auto w-full px-4 sm:px-6 lg:px-8 py-8 flex flex-col-reverse md:flex-row items-center gap-6 md:gap-10">
           {/* Left Content */}
           <div className="w-full md:w-3/4 text-left md:text-center">
-            <h1
-              className="text-3xl sm:text-4xl md:text-5xl text-custom-blue font-bold text-blue-600 mb-3 sm:mb-4"
+            <h2
+              className="text-3xl sm:text-4xl md:text-4xl text-custom-blue font-bold text-blue-600 mb-3 sm:mb-4"
               style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}
             >
-              About One Step Medi
-            </h1>
+              One Step Medi
+            </h2>
             <h1
-              className="text-2xl sm:text-3xl md:text-4xl text-custom-blue font-bold text-blue-600 mb-3 sm:mb-4"
+              className="text-2xl sm:text-2xl md:text-2xl text-custom-blue font-bold text-blue-600 mb-3 sm:mb-4"
               style={{ textShadow: '2px 2px 4px rgba(0,0,0,0.3)' }}
             >
-              Your Digital Healthcare Partner
+             India’s Most Trusted All-in-One Digital Healthcare Platform
             </h1>
             <p className="text-custom-blue font-medium text-sm sm:text-base md:text-lg mb-3 sm:mb-4">
-              We bring medical care to your fingertips, including online and in-clinic doctor appointments, diagnostics, and more!
+            We bring medical care to your fingertips, including in-clinic doctor appointments, home visits, emergency appointments and video consultations.
             </p>
-            <p className="text-custom-blue font-medium text-sm sm:text-base md:text-lg mb-4 md:mb-6">
+            {/* <p className="text-custom-blue font-medium text-sm sm:text-base md:text-lg mb-4 md:mb-6">
               Find Your Trusted Doctor In Just One Step – Only At OneStep Medi.
-            </p>
+            </p> */}
           </div>
 
           {/* Right Image */}

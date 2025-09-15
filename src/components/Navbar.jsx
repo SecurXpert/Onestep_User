@@ -5,6 +5,9 @@ import myImage from '../assets/logo.png';
 import cmplogo from '../assets/cmplogo.png';
 import { AuthContext } from '../context/AuthContext';
 import Chatbot from '../pages/Chatbot';
+import EmergencySiren from '../components/EmergencySiren';
+
+
 
 const Navbar = () => {
   const navigate = useNavigate();
@@ -14,7 +17,6 @@ const Navbar = () => {
   const [profileImage, setProfileImage] = useState(null);
   const [isChatbotOpen, setIsChatbotOpen] = useState(false);
 
-  // Fetch profile image from sessionStorage on mount
   useEffect(() => {
     const storedImage = sessionStorage.getItem('profileImage');
     if (storedImage) {
@@ -36,28 +38,24 @@ const Navbar = () => {
     setIsChatbotOpen(false);
   };
 
-  // Toggle profile menu
   const toggleProfileMenu = () => {
     setIsProfileMenuOpen((prev) => !prev);
     setIsMenuOpen(false);
     setIsChatbotOpen(false);
   };
 
-  // Toggle mobile menu
   const toggleMenu = () => {
     setIsMenuOpen((prev) => !prev);
     setIsProfileMenuOpen(false);
     setIsChatbotOpen(false);
   };
 
-  // Toggle chatbot
   const toggleChatbot = () => {
     setIsChatbotOpen(!isChatbotOpen);
     setIsMenuOpen(false);
     setIsProfileMenuOpen(false);
   };
 
-  // Handle logout
   const handleLogout = () => {
     const confirmLogout = window.confirm('Are you sure you want to logout?');
     if (confirmLogout) {
@@ -71,7 +69,6 @@ const Navbar = () => {
     }
   };
 
-  // Handle image load error
   const handleImageError = (e) => {
     console.error('Failed to load profile image in Navbar');
     setProfileImage(null);
@@ -81,16 +78,26 @@ const Navbar = () => {
 
   return (
     <nav className="bg-white shadow fixed top-0 left-0 right-0 z-40">
+      <style>
+        {`
+          @keyframes blink {
+            0% { opacity: 1; }
+            50% { opacity: 0; }
+            100% { opacity: 1; }
+          }
+          .animate-blink {
+            animation: blink 1s infinite;
+          }
+        `}
+      </style>
       <div className="w-full px-8 md:px-12">
         <div className="flex justify-between items-center h-20">
-          {/* Left Logo */}
           <div className="flex-shrink-0">
             <NavLink to="/">
               <img src={myImage} alt="Logo" className="h-16 w-auto" />
             </NavLink>
           </div>
 
-          {/* Center Nav Links (Desktop) */}
           <div className="hidden md:flex space-x-6 items-center">
             <NavLink to="/" className="nav-link">
               Home<hr />
@@ -101,20 +108,30 @@ const Navbar = () => {
             <NavLink to="/doctors" className="nav-link">
               Find Doctors<hr />
             </NavLink>
-            <NavLink to="/emergency" className="nav-link">
-              Emergency Appointment<hr />
-            </NavLink>
             <NavLink to="/article" className="nav-link">
               Articles<hr />
             </NavLink>
           </div>
 
-          {/* Right: Auth Buttons, Contact Us, Help?, and Menu Icon */}
-          <div className="flex items-center space-x-4 relative">
-            <div className="hidden md:flex space-x-4">
+          <div className="flex items-center space-x-3 relative">
+          
+          <NavLink
+  to="/emergency"
+  className="bg-red-600 text-white pr-2 rounded-lg hover:bg-red-700 transition shadow-md hover:scale-105 flex items-center"
+>
+  <div className=" translate-y-2">
+    <EmergencySiren size={50} /> {/* Only this blinks */}
+  </div>
+  Emergency
+</NavLink>
+
+
+
+
               <NavLink
                 to="/contact"
-                className="bg-custom-blue text-white px-4 py-2 rounded-lg hover:bg-blue-700 transition shadow-md hover:scale-105"
+                className="bg-custom-blue text-white px-4 py-2
+                 rounded-lg hover:bg-blue-700 transition shadow-md hover:scale-105"
               >
                 Contact Us
               </NavLink>
@@ -124,7 +141,7 @@ const Navbar = () => {
               >
                 Help?
               </button>
-            </div>
+            
             {!isLoggedIn ? (
               <button
                 onClick={handleRegisterClick}
@@ -148,14 +165,12 @@ const Navbar = () => {
                     onClick={toggleProfileMenu}
                   />
                 )}
-                {/* Profile Dropdown Menu */}
                 {isProfileMenuOpen && (
                   <div className="absolute right-0 mt-2 w-48 bg-white shadow-lg rounded-lg z-50">
                     <div className="flex flex-col p-4 space-y-2">
                       <NavLink
                         to="/profilepage"
-                        className="text-gray-7
-                        00 hover:text-purple-700"
+                        className="text-gray-700 hover:text-purple-700"
                         onClick={toggleProfileMenu}
                       >
                         My Profile
@@ -171,7 +186,6 @@ const Navbar = () => {
                 )}
               </div>
             )}
-            {/* Mobile Menu Icon */}
             <div className="md:hidden">
               <FaBars
                 className="text-3xl text-purple-700 cursor-pointer"
@@ -182,7 +196,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Mobile Menu */}
       <div
         className={`fixed top-0 right-0 h-auto w-64 bg-white shadow-lg z-50 transform transition-transform duration-300 ease-in-out ${
           isMenuOpen ? 'translate-x-0' : 'translate-x-full'
@@ -286,7 +299,6 @@ const Navbar = () => {
         </div>
       </div>
 
-      {/* Overlay for Mobile Menu */}
       {isMenuOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 md:hidden transition-opacity duration-300"
@@ -294,7 +306,6 @@ const Navbar = () => {
         ></div>
       )}
 
-      {/* Overlay for Profile Menu */}
       {isProfileMenuOpen && (
         <div
           className="fixed inset-0 bg-black bg-opacity-50 z-40 hidden md:block"
@@ -302,7 +313,6 @@ const Navbar = () => {
         ></div>
       )}
 
-      {/* Render Chatbot */}
       <Chatbot isOpen={isChatbotOpen} onClose={() => setIsChatbotOpen(false)} />
     </nav>
   );

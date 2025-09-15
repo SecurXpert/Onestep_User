@@ -140,7 +140,7 @@ const SpecialityMenu = () => {
   const isSearchEnabled = searchParams.area && searchParams.searchTerm;
 
   return (
-    <div className="w-full bg-white py-10">
+    <div className="w-full bg-white py-3">
       {/* Search Bar */}
       <div className="w-full max-w-7xl mx-auto px-4 mb-8">
         <form onSubmit={handleSearch} className="flex flex-col md:flex-row gap-4 items-center justify-center">
@@ -232,9 +232,9 @@ const SpecialityMenu = () => {
 
       <div className="w-full max-w-7xl mx-auto px-2 2xs:px-3 xs:px-4 2sm:px-4 sm:px-4 md:px-4 md800:px-5 md900:px-6 lg:px-6 xl:px-8 2xl:px-10 3xl:px-12 flex flex-col 2sm:flex-row items-start 2sm:items-center justify-between mb-4 2xs:mb-5 xs:mb-6 2sm:mb-6 sm:mb-6 md:mb-6 md800:mb-7 md900:mb-7 lg:mb-8 xl:mb-9 2xl:mb-10 3xl:mb-11 gap-3 2xs:gap-3.5 xs:gap-4">
         <div className="flex flex-col">
-          <h2 className="text-lg 2xs:text-xl xs:text-xl 2sm:text-2xl sm:text-2xl md:text-2xl md800:text-2xl md900:text-3xl lg:text-3xl xl:text-4xl 2xl:text-4xl 3xl:text-5xl text-custom-blue font-bold mb-1 2xs:mb-1.5 xs:mb-2 2sm:mb-2 sm:mb-2 md:mb-2 md800:mb-2.5 md900:mb-2.5 lg:mb-2.5 xl:mb-3 2xl:mb-3 3xl:mb-3.5">
+          <h4 className="text-lg 2xs:text-md xs:text-md 2sm:text-lg sm:text-lg md:text-xl md800:text-xl md900:text-2xl lg:text-2xl xl:text-3xl 2xl:text-3xl 3xl:text-4xl text-custom-blue font-bold mb-1 2xs:mb-1.5 xs:mb-2 2sm:mb-2 sm:mb-2 md:mb-2 md800:mb-2.5 md900:mb-2.5 lg:mb-2.5 xl:mb-3 2xl:mb-3 3xl:mb-3.5">
             Connect with top doctor specialists for all your healthcare needs
-          </h2>
+          </h4>
           <p className="text-sm 2xs:text-sm xs:text-base 2sm:text-base sm:text-base md:text-base md800:text-lg md900:text-lg lg:text-lg xl:text-xl 2xl:text-xl 3xl:text-2xl text-custom-blue">
             Schedule online or in-clinic consultations with verified specialists...
           </p>
@@ -297,12 +297,22 @@ const SpecialityMenu = () => {
 
       {/* In-Clinic Consultation Section */}
       <div className="w-full max-w-7xl mx-auto px-4 py-8 bg-white shadow-md rounded-lg mt-8">
+    
         <h2 className="text-base 2xs:text-base xs:text-lg 2sm:text-lg sm:text-lg md:text-lg md800:text-xl md900:text-xl lg:text-xl font-semibold text-gray-700 mb-4">
-          Book an in-clinic appointment with our Experienced & Verified Doctors
+        Schedule Your Clinic Appointment with Verified Doctors
         </h2>
+        <div className="w-full max-w-7xl flex flex-col 2sm:flex-row items-start 2sm:items-center justify-between  gap-3 2xs:gap-3.5 xs:gap-4">
         <p className="text-gray-600 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-base md900:text-base lg:text-base mb-6">
-          Find Nearby Specialists for Your Health Needs – Easy and Fast
+          These are the specializations we provide for in-clinic appointments, ensuring you meet the right doctor for your health needs quickly and easily. 
         </p>
+        <button
+          onClick={handleViewAll}
+          className="self-end 2sm:self-auto px-3 2xs:px-3.5 xs:px-4 2sm:px-5 sm:px-5 md:px-5 md800:px-5 md900:px-5.5 lg:px-5 xl:px-6 2xl:px-6 3xl:px-6 py-1 2xs:py-1 xs:py-1.5 2sm:py-2 sm:py-2 md:py-2 md800:py-2 md900:py-2.25 lg:py-2 xl:py-2 2xl:py-2 3xl:py-2 bg-custom-blue text-white font-semibold rounded-full  mb-4 hover:bg-opacity-90 transition-colors duration-300 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-base 2xl:text-base 3xl:text-base"
+          aria-label="View all doctors"
+        >
+          View All
+        </button>
+        </div>
         <div className="flex flex-row overflow-x-auto space-x-4 pb-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-6 md:overflow-x-hidden">
           <div
             className="flex flex-col items-center cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-2 min-w-[150px] 2xs:min-w-[160px] xs:min-w-[170px] 2sm:min-w-[180px] sm:min-w-[200px] md:min-w-[220px] md800:min-w-[230px] md900:min-w-[240px] lg:min-w-[250px] snap-center relative"
@@ -354,7 +364,7 @@ const SpecialityMenu = () => {
               </div>
             </div>
             <h3 className="text-sm 2xs:text-sm xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-md md900:text-md lg:text-md font-medium text-gray-800">
-              Dermatologist
+            Cosmetologist
             </h3>
             <p className="text-xs 2xs:text-xs xs:text-xs 2sm:text-xs sm:text-xs md:text-xs md800:text-sm md900:text-sm lg:text-sm text-gray-600 text-center">
               For skin, hair, and aesthetic treatments
@@ -422,11 +432,20 @@ const SpecialityMenu = () => {
       {/* Expert Healthcare Section */}
       <div className="w-full max-w-7xl mx-auto px-4 py-8 bg-white shadow-md rounded-lg mt-8">
         <h2 className="text-base 2xs:text-base xs:text-lg 2sm:text-lg sm:text-lg md:text-lg md800:text-xl md900:text-xl lg:text-xl font-semibold text-gray-700 mb-4">
-          Expert HealthCare – Right at Your Doorstep
+        Expert Healthcare at Your Home 
         </h2>
+        <div className="w-full max-w-7xl flex flex-col 2sm:flex-row items-start 2sm:items-center justify-between  gap-3 2xs:gap-3.5 xs:gap-4">
         <p className="text-gray-600 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-base md900:text-base lg:text-base mb-6">
-          Book trusted specialists nearby for quick consultations and appointments
+        Book trusted specialists for quick home visits. Get hassle-free medical care at your doorstep with verified doctors available when you need them. 
         </p>
+        <button
+          onClick={handleViewAll}
+          className="self-end 2sm:self-auto px-3 2xs:px-3.5 xs:px-4 2sm:px-5 sm:px-5 md:px-5 md800:px-5 md900:px-5.5 lg:px-5 xl:px-6 2xl:px-6 3xl:px-6 py-1 2xs:py-1 xs:py-1.5 2sm:py-2 sm:py-2 md:py-2 md800:py-2 md900:py-2.25 lg:py-2 xl:py-2 2xl:py-2 3xl:py-2 bg-custom-blue text-white font-semibold rounded-full hover:bg-opacity-90 transition-colors duration-300 mb-4 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-base 2xl:text-base 3xl:text-base"
+          aria-label="View all doctors"
+        >
+          View All
+        </button>
+        </div>
         <div className="flex flex-row overflow-x-auto space-x-4 pb-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-6 md:overflow-x-hidden">
           <div
             className="flex flex-col items-center cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-2 min-w-[150px] 2xs:min-w-[160px] xs:min-w-[170px] 2sm:min-w-[180px] sm:min-w-[200px] md:min-w-[220px] md800:min-w-[230px] md900:min-w-[240px] lg:min-w-[250px] snap-center relative"
@@ -542,9 +561,139 @@ const SpecialityMenu = () => {
           </div>
         </div>
       </div>
-
+      <div className="w-full max-w-7xl mx-auto px-4 py-8 bg-white shadow-md rounded-lg mt-8">
+        <h2 className="text-base 2xs:text-base xs:text-lg 2sm:text-lg sm:text-lg md:text-lg md800:text-xl md900:text-xl lg:text-xl font-semibold text-gray-700 mb-4">
+        Quick Emergency Appointments with Trusted Doctors 
+        </h2>
+        <div className="w-full max-w-7xl flex flex-col 2sm:flex-row items-start 2sm:items-center justify-between  gap-3 2xs:gap-3.5 xs:gap-4">
+        <p className="text-gray-600 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-base md900:text-base lg:text-base mb-6">
+        Access verified doctors 24/7 with hassle-free emergency appointments, connect easily in just 5–7 minutes. 
+        </p>
+        <button
+          onClick={handleViewAll}
+          className="self-end 2sm:self-auto px-3 2xs:px-3.5 xs:px-4 2sm:px-5 sm:px-5 md:px-5 md800:px-5 md900:px-5.5 lg:px-5 xl:px-6 2xl:px-6 3xl:px-6 py-1 2xs:py-1 xs:py-1.5 2sm:py-2 sm:py-2 md:py-2 md800:py-2 md900:py-2.25 lg:py-2 xl:py-2 2xl:py-2 3xl:py-2 bg-custom-blue text-white font-semibold rounded-full hover:bg-opacity-90 transition-colors duration-300 mb-4 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-base 2xl:text-base 3xl:text-base"
+          aria-label="View all doctors"
+        >
+          View All
+        </button>
+        </div>
+        <div className="flex flex-row overflow-x-auto space-x-4 pb-4 snap-x snap-mandatory md:grid md:grid-cols-4 md:gap-6 md:overflow-x-hidden">
+          <div
+            className="flex flex-col items-center cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-2 min-w-[150px] 2xs:min-w-[160px] xs:min-w-[170px] 2sm:min-w-[180px] sm:min-w-[200px] md:min-w-[220px] md800:min-w-[230px] md900:min-w-[240px] lg:min-w-[250px] snap-center relative"
+            onClick={() => handleClick('Physiotherapist')}
+          >
+            <div className="relative w-full group">
+              <img
+                src={phys}
+                alt="Physiotherapist"
+                className="w-full h-28 2xs:h-32 xs:h-36 2sm:h-40 sm:h-44 md:h-46 md800:h-46 md900:h-46 lg:h-48 object-cover rounded-lg mb-2 transition-opacity duration-300 group-hover:opacity-75"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-purple-600 bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                <button
+                  onClick={() => handleClick('Physiotherapist')}
+                  className="flex items-center gap-2 bg-white text-purple-600 px-4 py-2 rounded-lg font-semibold text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-base md900:text-base lg:text-base hover:bg-purple-100 transition"
+                  title="Book Physiotherapist Appointment"
+                  aria-label="Book Physiotherapist Appointment"
+                >
+                  Book Now <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+            <h3 className="text-sm 2xs:text-sm xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-md md900:text-md lg:text-md font-medium text-gray-800">
+              Physiotherapist
+            </h3>
+            <p className="text-xs 2xs:text-xs xs:text-xs 2sm:text-xs sm:text-xs md:text-xs md800:text-sm md900:text-sm lg:text-sm text-gray-600 text-center">
+              for recovery, rehabilitation, and mobility support.
+            </p>
+          </div>
+          <div
+            className="flex flex-col items-center cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-2 min-w-[150px] 2xs:min-w-[160px] xs:min-w-[170px] 2sm:min-w-[180px] sm:min-w-[200px] md:min-w-[220px] md800:min-w-[230px] md900:min-w-[240px] lg:min-w-[250px] snap-center relative"
+            onClick={() => handleClick('Nutritionist')}
+          >
+            <div className="relative w-full group">
+              <img
+                src={nutritionist}
+                alt="Nutritionist / Dietitian"
+                className="w-full h-28 2xs:h-32 xs:h-36 2sm:h-40 sm:h-44 md:h-46 md800:h-46 md900:h-46 lg:h-48 object-cover rounded-lg mb-2 transition-opacity duration-300 group-hover:opacity-75"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-purple-600 bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                <button
+                  onClick={() => handleClick('Nutritionist')}
+                  className="flex items-center gap-2 bg-white text-purple-600 px-4 py-2 rounded-lg font-semibold text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-base md900:text-base lg:text-base hover:bg-purple-100 transition"
+                  title="Book Nutritionist Appointment"
+                  aria-label="Book Nutritionist Appointment"
+                >
+                  Book Now <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+            <h3 className="text-sm 2xs:text-sm xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-md md900:text-md lg:text-md font-medium text-gray-800">
+              Nutritionist / Dietitian
+            </h3>
+            <p className="text-xs 2xs:text-xs xs:text-xs 2sm:text-xs sm:text-xs md:text-xs md800:text-sm md900:text-sm lg:text-sm text-gray-600 text-center">
+              for personalized diet planning and nutrition advice.
+            </p>
+          </div>
+          <div
+            className="flex flex-col items-center cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-2 min-w-[150px] 2xs:min-w-[160px] xs:min-w-[170px] 2sm:min-w-[180px] sm:min-w-[200px] md:min-w-[220px] md800:min-w-[230px] md900:min-w-[240px] lg:min-w-[250px] snap-center relative"
+            onClick={() => handleClick('Homeopathy')}
+          >
+            <div className="relative w-full group">
+              <img
+                src={Homeopathy}
+                alt="Homeopathy"
+                className="w-full h-28 2xs:h-32 xs:h-36 2sm:h-40 sm:h-44 md:h-46 md800:h-46 md900:h-46 lg:h-48 object-cover rounded-lg mb-2 transition-opacity duration-300 group-hover:opacity-75"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-purple-600 bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                <button
+                  onClick={() => handleClick('Homeopathy')}
+                  className="flex items-center gap-2 bg-white text-purple-600 px-4 py-2 rounded-lg font-semibold text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-base md900:text-base lg:text-base hover:bg-purple-100 transition"
+                  title="Book Homeopathy Appointment"
+                  aria-label="Book Homeopathy Appointment"
+                >
+                  Book Now <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+            <h3 className="text-sm 2xs:text-sm xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-md md900:text-md lg:text-md font-medium text-gray-800">
+              Homeopathy
+            </h3>
+            <p className="text-xs 2xs:text-xs xs:text-xs 2sm:text-xs sm:text-xs md:text-xs md800:text-sm md900:text-sm lg:text-sm text-gray-600 text-center">
+              treat conditions like allergies, skin disorders, migraines, digestive issues, anxiety, and chronic pain
+            </p>
+          </div>
+          <div
+            className="flex flex-col items-center cursor-pointer transition-transform duration-300 ease-in-out hover:-translate-y-2 min-w-[150px] 2xs:min-w-[160px] xs:min-w-[170px] 2sm:min-w-[180px] sm:min-w-[200px] md:min-w-[220px] md800:min-w-[230px] md900:min-w-[240px] lg:min-w-[250px] snap-center relative"
+            onClick={() => handleClick('Nurse')}
+          >
+            <div className="relative w-full group">
+              <img
+                src={nurse}
+                alt="Nurse / Elderly Care Assistant"
+                className="w-full h-28 2xs:h-32 xs:h-36 2sm:h-40 sm:h-44 md:h-46 md800:h-46 md900:h-46 lg:h-48 object-cover rounded-lg mb-2 transition-opacity duration-300 group-hover:opacity-75"
+              />
+              <div className="absolute inset-0 flex items-center justify-center bg-purple-600 bg-opacity-50 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-lg">
+                <button
+                  onClick={() => handleClick('Nurse')}
+                  className="flex items-center gap-2 bg-white text-purple-600 px-4 py-2 rounded-lg font-semibold text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-base md900:text-base lg:text-base hover:bg-purple-100 transition"
+                  title="Book Nurse Appointment"
+                  aria-label="Book Nurse Appointment"
+                >
+                  Book Now <ArrowRight className="h-4 w-4" />
+                </button>
+              </div>
+            </div>
+            <h3 className="text-sm 2xs:text-sm xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-md md900:text-md lg:text-md font-medium text-gray-800">
+              Nurse / First Aid
+            </h3>
+            <p className="text-xs 2xs:text-xs xs:text-xs 2sm:text-xs sm:text-xs md:text-xs md800:text-sm md900:text-sm lg:text-sm text-gray-600 text-center">
+              for post-surgical care, injections, wound dressing
+            </p>
+          </div>
+        </div>
+      </div>
       {/* Articles Section */}
-      <div className="w-full max-w-7xl mx-auto px-8 py-8 mt-8 flex flex-col md:flex-row items-start bg-white shadow-md rounded-lg justify-center">
+      <div className="w-full max-w-7xl mx-auto px-3 py-2 mt-8 flex flex-col md:flex-row items-start bg-white shadow-md rounded-lg justify-center">
         <div className="md:w-1/3 mb-4 md:mb-0 flex flex-col items-center md:items-start text-center md:text-left">
           <h2 className="text-xl font-semibold text-gray-700 mb-2">Read top articles from health experts</h2>
           <p className="text-gray-600 mb-4">Health articles that keep you informed about good health practices and achieve your goals.</p>
