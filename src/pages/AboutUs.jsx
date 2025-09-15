@@ -54,7 +54,42 @@ const AboutUs = () => {
       image: doctor1
     }
   ];
-
+  const patientTestimonials = [
+    {
+      id: 1,
+      name: "Ravi Kumar",
+      quote: "One Step Medi made it easy to find the right specialist near me. The clinic visit was comfortable and well-organized.",
+      image: doctor1
+    },
+    {
+      id: 2,
+      name: "Ananya Sharma",
+      quote: "I liked how clear the booking process was on One Step Medi. I got reminders and my in-clinic consultation went smoothly.",
+      image: doctor1
+    },
+    {
+      id: 3,
+      name: "Vikram Singh",
+      quote: "With One Step Medi, I didn’t have to worry about missing out on a doctor’s slot. The appointment was confirmed quickly, and the doctor gave me good care.",
+      image: doctor1
+    },
+    {
+      id: 4,
+      name: "Priya Menon",
+      quote: "I used One Step Medi for a video consultation when I couldn’t visit the clinic. The doctor explained everything clearly, and it felt just like meeting in person.",
+      image: doctor1
+    },
+    {
+      id: 5,
+      name: "Amit Patel",
+      quote: "When I needed an emergency appointment, One Step Medi helped me find an available doctor immediately. The service was very reliable.",
+      image: doctor1
+    }
+  ];
+  
+  const handleViewAll = () => {
+    navigate('/doctors');
+  };
   // Scroll to a card by reading its actual offset (works at all widths)
   const scrollToTestimonial = (index) => {
     const container = containerRef.current;
@@ -114,6 +149,13 @@ const AboutUs = () => {
             {/* <p className="text-custom-blue font-medium text-sm sm:text-base md:text-lg mb-4 md:mb-6">
               Find Your Trusted Doctor In Just One Step – Only At OneStep Medi.
             </p> */}
+            <button
+          onClick={handleViewAll}
+          className="self-end 2sm:self-auto px-3 2xs:px-3.5 xs:px-4 2sm:px-5 sm:px-5 md:px-5 md800:px-5 md900:px-5.5 lg:px-5 xl:px-6 2xl:px-6 3xl:px-6 py-1 2xs:py-1 xs:py-1.5 2sm:py-2 sm:py-2 md:py-2 md800:py-2 md900:py-2.25 lg:py-2 xl:py-2 2xl:py-2 3xl:py-2 bg-custom-blue text-white font-semibold rounded-full hover:bg-opacity-90 transition-colors duration-300 mb-4 text-xs 2xs:text-xs xs:text-sm 2sm:text-sm sm:text-sm md:text-sm md800:text-sm md900:text-sm lg:text-sm xl:text-base 2xl:text-base 3xl:text-base"
+          aria-label="View all doctors"
+        >
+          Specialists
+        </button>
           </div>
 
           {/* Right Image */}
@@ -411,6 +453,88 @@ const AboutUs = () => {
               >
                 <div className="flex transition-all duration-300">
                   {testimonials.map((testimonial, idx) => (
+                    <div
+                      key={testimonial.id}
+                      ref={(el) => (cardRefs.current[idx] = el)}
+                      className="flex flex-col bg-white p-4 rounded-lg shadow-md w-[80vw] xs:w-[70vw] sm:w-[300px] md:w-[320px] h-auto min-h-[180px] mx-2 sm:mx-4 flex-shrink-0 snap-start"
+                    >
+                      <div className="flex items-center space-x-3 mb-3">
+                        <img
+                          src={testimonial.image}
+                          alt="Doctor Profile"
+                          className="w-10 h-10 object-cover rounded-full"
+                        />
+                        <div>
+                          <p className="text-gray-800 font-semibold text-sm sm:text-base">{testimonial.name}</p>
+                          <p className="text-gray-600 text-xs">{testimonial.specialty}</p>
+                        </div>
+                      </div>
+                      <p className="text-gray-700 text-sm italic flex-grow">"{testimonial.quote}"</p>
+                    </div>
+                  ))}
+                </div>
+              </div>
+
+              {/* Right Arrow */}
+              <button
+                onClick={nextTestimonial}
+                className="absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition"
+                aria-label="Next testimonial"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                </svg>
+              </button>
+
+              {/* Dots Indicator */}
+              <div className="flex justify-center mt-4">
+                {testimonials.map((_, index) => (
+                  <button
+                    key={index}
+                    onClick={() => {
+                      setCurrentIndex(index);
+                      scrollToTestimonial(index);
+                    }}
+                    aria-label={`Go to slide ${index + 1}`}
+                    className={`w-2 h-2 mx-1 rounded-full ${index === currentIndex ? 'bg-blue-500' : 'bg-gray-300'}`}
+                  />
+                ))}
+              </div>
+            </div>
+          </div>
+          <div className="bg-gray-100 rounded-2xl p-6 shadow-md hover:shadow-xl transition-all duration-300 max-w-7xl mx-auto mt-8 mb-8">
+            <div className="w-full p-2 sm:p-4">
+              <h3 className="text-2xl sm:text-3xl font-semibold text-gray-800 mb-3 text-center">What Doctor Say About Us?</h3>
+              <p className="font-bold mb-3 text-center">Trusted by healthcare professionals across India.</p>
+              <p className="text-gray-600 text-sm mb-2 text-center">
+                "OneStep Medi has revolutionized how I connect with my patients. The platform's seamless integration and reliable support make it a game-changer for healthcare delivery."
+              </p>
+              <p className="text-gray-600 text-sm mb-2 text-center">
+                "The ease of managing patient records and scheduling consultations has saved me hours every week. Highly recommend it!"
+              </p>
+            </div>
+
+            {/* Testimonials Carousel */}
+            <div className="w-full p-2 sm:p-4 mt-4 relative">
+              {/* Left Arrow */}
+              <button
+                onClick={prevTestimonial}
+                className="absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-10 bg-white p-2 rounded-full shadow-md hover:bg-gray-100 transition"
+                aria-label="Previous testimonial"
+              >
+                <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 sm:h-6 sm:w-6 text-gray-600" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
+                </svg>
+              </button>
+
+              {/* Testimonial Container */}
+              <div
+                ref={containerRef}
+                className="flex overflow-x-hidden sm:mx-6 md:mx-10 scroll-smooth snap-x snap-mandatory"
+                style={{ scrollbarWidth: 'none' }}
+              >
+                <div className="flex transition-all duration-300">
+                  {patientTestimonials.map((testimonial, idx) => (
                     <div
                       key={testimonial.id}
                       ref={(el) => (cardRefs.current[idx] = el)}

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { FaFacebookF, FaInstagram } from 'react-icons/fa';
-import logo from '../assets/logo.png';
+import logo from '../assets/onelogo.png';
 import Chatbot from '../pages/Chatbot';
 
 const Footer = () => {
@@ -33,7 +33,7 @@ const Footer = () => {
             <img
               src={logo}
               alt="One Step Medi Logo"
-              className="w-10 2xs:w-10 xs:w-12 2sm:w-12 sm:w-12 md:w-14 md800:w-14 md900:w-14 lg:w-14 xl:w-14 2xl:w-14 3xl:w-14 h-10 2xs:h-10 xs:h-12 2sm:h-12 sm:h-12 md:h-14 md800:h-14 md900:h-14 lg:h-14 xl:h-14 2xl:h-14 3xl:h-14 mr-2 2xs:mr-2 xs:mr-3 2sm:mr-3 sm:mr-3 rounded-full border-2 border-blue-300"
+              className="w-14 2xs:w-14 xs:w-16 2sm:w-16 sm:w-16 md:w-16 md800:w-18 md900:w-18 lg:w-18 xl:w-14 2xl:w-18 3xl:w-18 h-14 2xs:h-14 xs:h-16 2sm:h-16 sm:h-16 md:h-16 md800:h-16 md900:h-18 lg:h-14 xl:h-18 2xl:h-18 3xl:h-18 mr-2 2xs:mr-2 xs:mr-3 2sm:mr-3 sm:mr-3   border-blue-300"
             />
             <h3 className="text-lg 2xs:text-lg xs:text-xl 2sm:text-xl sm:text-xl md:text-2xl md800:text-2xl md900:text-2xl lg:text-2xl xl:text-2xl 2xl:text-2xl 3xl:text-2xl font-bold text-blue-100">
               One Step Medi
